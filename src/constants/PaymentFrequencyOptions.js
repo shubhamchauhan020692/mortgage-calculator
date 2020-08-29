@@ -1,20 +1,20 @@
 export const PAYMENT_FREQUENCY_OPTIONS = [{
   key: "weekly",
-  value: 'Weekly'
+  label: 'Weekly',
+  value: 52
 },
 {
   key: "biweekly",
-  value: 'Bi-Weekly (every 2 weeks)'
+  label: 'Bi-Weekly (every 2 weeks)',
+  value: 26
 },
 {
   key: "monthly",
-  value: 'Monthly (12x per year)'
+  label: 'Monthly (12x per year)',
+  value: 12
 },
 {
   key: "semimonthly",
-  value: 'Semi-monthly (24x per year)'
-},
-{
-  key: "weekly",
-  value: 'Weekly'
+  label: 'Semi-monthly (24x per year)',
+  value: 24
 }]
