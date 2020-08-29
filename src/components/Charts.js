@@ -21,6 +21,7 @@ export const Charts = () => {
       "uv": 2000,
       "pv": 9800,
       "amt": 2290
+      
     },
     {
       "name": "Page D",
