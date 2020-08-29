@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { PAYMENT_FREQUENCY_OPTIONS } from '../constants/PaymentFrequencyOptions';
-import ReactTooltip from 'react-tooltip';
 import { summaryCategories } from '../constants/SummaryCategories';
 
 export const SummaryTable = () => {
@@ -29,25 +27,25 @@ export const SummaryTable = () => {
     term: "36",
     amortization: "49",
   }];
-  
-return (
-  <table class="table table-striped">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Category</th>
-        <th scope="col">Term</th>
-        <th scope="col">Amortization</th>
-      </tr>
-    </thead>
-    <tbody>
-      {data.map((item, index) => (
+
+  return (
+    <table class="table table-striped">
+      <thead class="thead-dark">
         <tr>
-          <th scope="row">{item.category}</th>
-          <td>{item.term}</td>
-          <td>{item.amortization}</td>
+          <th scope="col">Category</th>
+          <th scope="col">Term</th>
+          <th scope="col">Amortization</th>
         </tr>
-      ))}
-    </tbody>
-  </table>
-)
+      </thead>
+      <tbody>
+        {data.map((item, index) => (
+          <tr>
+            <th scope="row">{item.category}</th>
+            <td>{item.term}</td>
+            <td>{item.amortization}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
 }

@@ -1,4 +1,4 @@
-export const PAYMENT_FREQUENCY_OPTIONS = [{
+export const paymentFrequencyOptions = [{
   key: "weekly",
   label: 'Weekly',
   value: 52
@@ -17,4 +17,15 @@ export const PAYMENT_FREQUENCY_OPTIONS = [{
   key: "semimonthly",
   label: 'Semi-monthly (24x per year)',
   value: 24
-}]
+}];
+
+export const getTermOptions = () => {
+  let termOptionsArray = [];
+  for (let i = 1; i <= 30; i++) {
+    termOptionsArray.push({
+      label: `${i}`,
+      value: i
+    })
+  }
+  return termOptionsArray;
+}
