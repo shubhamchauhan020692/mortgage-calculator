@@ -1,8 +1,7 @@
 import React from "react";
-import { summaryCategories } from "../constants/SummaryCategories";
 
 export const SummaryTable = ({ summaryTableData }) => (
-  summaryTableData.length > 0 && <table id="summary-table" data-testId="summary-table" className="table table-striped">
+  summaryTableData.length > 0 && <table id="summary-table" data-testid="summary-table" className="table table-striped">
     <thead className="thead-dark">
       <tr>
         <th scope="col">Category</th>
@@ -14,11 +13,10 @@ export const SummaryTable = ({ summaryTableData }) => (
       {summaryTableData.map((item, index) => (
         <tr key={index}>
           <th scope="row">{item.category}</th>
-          <td>{item.term}</td>
-          <td>{item.amortization}</td>
+          <td id={`term-${index}`} data-testid={`term-${index}`}>{item.term}</td>
+          <td id={`amortization-${index}`} data-testid={`amortization-${index}`}>{item.amortization}</td>
         </tr>
       ))}
     </tbody>
   </table>
 );
-
