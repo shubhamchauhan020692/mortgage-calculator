@@ -27,8 +27,12 @@ describe('Summary Table', () => {
     fireEvent.blur(mortgageAmt);
     // console.log('getByTestId-000', getByTestId('term-0'))
     expect(getAllByText(/319.73/).length).toEqual(2)
-    expect(getByText(/10019.40/)).toBeTruthy();
-    expect(getByText(/28348.20/)).toBeTruthy();
+    expect(getByText(/10153.60/)).toBeTruthy();
+    expect(getByText(/28214.00/)).toBeTruthy();
     expect(getByText(/38367.78/)).toBeTruthy();
+
+    expect(getByText(/100000.00/)).toBeTruthy();
+    expect(getByText('91838.89')).toBeTruthy();
+    expect(getByText('191838.89')).toBeTruthy();
   });
 });
