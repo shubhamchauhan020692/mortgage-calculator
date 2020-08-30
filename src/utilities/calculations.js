@@ -16,7 +16,7 @@ export const calculateMortage = (
   const summaryTableData = [];
 
   summaryTableData.push({
-    category: [summaryCategories.NUMBER_OF_PAYMENTS],
+    category: summaryCategories.NUMBER_OF_PAYMENTS,
     term: numberOfTermPayments,
     amortization: numberOfTotalPayments,
   });
@@ -31,7 +31,7 @@ export const calculateMortage = (
     (1 - Math.pow(1 + frequencyfactoredRateFloat, -numberOfTotalPayments));
 
   summaryTableData.push({
-    category: [summaryCategories.MORTGAGE_PAYMENT],
+    category: summaryCategories.MORTGAGE_PAYMENT,
     term: financial(payment),
     amortization: financial(payment),
   });
@@ -57,19 +57,19 @@ export const calculateMortage = (
   }
 
   summaryTableData.push({
-    category: [summaryCategories.PRINCIPAL_PAYMENTS],
+    category: summaryCategories.PRINCIPAL_PAYMENTS,
     term: financial(termPrincipalPaymentSum),
     amortization: financial(mortgageAmt),
   });
 
   summaryTableData.push({
-    category: [summaryCategories.INTEREST_PAYMENTS],
+    category: summaryCategories.INTEREST_PAYMENTS,
     term: financial(termInterestPaymentSum),
     amortization: financial(numberOfTotalPayments * payment - mortgageAmt),
   });
 
   summaryTableData.push({
-    category: [summaryCategories.TOTAL_COST],
+    category: summaryCategories.TOTAL_COST,
     term: financial(numberOfTermPayments * payment),
     amortization: financial(numberOfTotalPayments * payment),
   });
