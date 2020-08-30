@@ -5,6 +5,7 @@ import { SummaryTable } from './SummaryTable';
 import { validateInputs } from '../utilities/validate';
 import { getTermOptions, paymentFrequencyOptions } from '../constants/PaymentPlanOptions';
 import { helperTexts } from '../constants/Identifiers';
+import { calculateMortage } from '../utilities/calculations';
 
 export const Mortgage = () => {
   const [mortgageAmt, setMortgageAmt] = useState(50000);
@@ -42,6 +43,8 @@ export const Mortgage = () => {
       ...errors,
       ...formErrors
     })
+    // !formErrors && calculateMortage(mortgageAmt, rate, amortizationPeriod, paymentFrequency, term)
+    calculateMortage(100000, 6, 25, 24, 5)
   }
 
   console.log('errors', errors)
