@@ -17,12 +17,12 @@ export const Charts = (props) => {
     <>
       <div className="container-fluid">
         <h2 className="diagram-heading">Payment Diagrams</h2>
-        <div className="row justify-content-center mb-3 mt-3">
+        <div className="row justify-content-center justify-content-md-around mb-3 mt-3">
           <AreaChart
+            className='chart-container'
             width={500}
             height={250}
             data={props.graphData}
-            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
           >
             <defs>
               <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -43,14 +43,19 @@ export const Charts = (props) => {
             />
           </AreaChart>
 
-          <BarChart width={300} height={250} data={props.barData}>
+          <BarChart
+            className='chart-container'
+            width={300}
+            height={250}
+            data={props.barData}
+          >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="totalCost" tick={{ stroke: colors.PRIMARY }} />
             <YAxis tick={{ stroke: colors.PRIMARY }} />
             <Tooltip />
             <Legend />
-            <Bar dataKey="Principal" fill={colors.PURPLE} />
-            <Bar dataKey="Interest" fill={colors.LIGHT_GREEN} />
+            <Bar dataKey="principal" fill={colors.PURPLE} />
+            <Bar dataKey="interest" fill={colors.LIGHT_GREEN} />
           </BarChart>
         </div>
       </div>
