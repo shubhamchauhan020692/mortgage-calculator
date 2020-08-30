@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Charts } from "./Charts";
 import { SummaryTable } from "./SummaryTable";
 import { validateInputs, hasErrors } from "../utilities/validate";
@@ -66,7 +66,7 @@ export const Home = () => {
     setBarData(barData);
   }
 
-  const handleInputBlur = () => {
+  const handleSubmit = () => {
     const formErrors = validateInputs(
       mortgageAmt,
       rate,
@@ -93,7 +93,7 @@ export const Home = () => {
         paymentFrequency={paymentFrequency}
         term={term}
         handleInputChange={handleInputChange}
-        handleInputBlur={handleInputBlur}
+        handleSubmit={handleSubmit}
         errors={errors}
       />
       {summaryTableData?.length > 0 && !hasErrors(errors) && <SummaryTable summaryTableData={summaryTableData} />}

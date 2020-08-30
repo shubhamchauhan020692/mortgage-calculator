@@ -5,9 +5,9 @@ import {
   paymentFrequencyOptions,
 } from "../constants/PaymentPlanOptions";
 
-export const MortgageForm = ({ mortgageAmt, rate, amortizationPeriod, paymentFrequency, term, handleInputChange, handleInputBlur, errors }) => {
+export const MortgageForm = ({ mortgageAmt, rate, amortizationPeriod, paymentFrequency, term, handleInputChange, handleSubmit, errors }) => {
   return (
-    <div id="mortgage-form-container" data-testid="mortgage-form-container" className="jumbotron no-gutters col-12 col-sm-6 mt-3">
+    <div id="mortgage-form-container" data-testid="mortgage-form-container" className="jumbotron no-gutters col-12 col-sm-6 mt-3 py-5">
       <div className="row align-items-center mb-3">
         <div className="col-12 col-sm-6">
           <label htmlFor="basic-url">Mortgage Amount</label>
@@ -34,7 +34,6 @@ export const MortgageForm = ({ mortgageAmt, rate, amortizationPeriod, paymentFre
               placeholder="Value nearest to dollar amount"
               value={mortgageAmt}
               onChange={handleInputChange}
-              onBlur={handleInputBlur}
             />
             <div className="input-group-append">
               <span className="input-group-text">.00</span>
@@ -74,7 +73,6 @@ export const MortgageForm = ({ mortgageAmt, rate, amortizationPeriod, paymentFre
               max={100}
               min={0}
               onChange={handleInputChange}
-              onBlur={handleInputBlur}
             />
           </div>
           {errors?.rate && <div className="error">{errors?.rate}</div>}
@@ -103,7 +101,6 @@ export const MortgageForm = ({ mortgageAmt, rate, amortizationPeriod, paymentFre
             placeholder="Years"
             value={amortizationPeriod}
             onChange={handleInputChange}
-            onBlur={handleInputBlur}
             max={30}
             min={1}
           />
@@ -131,7 +128,6 @@ export const MortgageForm = ({ mortgageAmt, rate, amortizationPeriod, paymentFre
             data-testid="paymentFrequency"
             value={paymentFrequency}
             onChange={handleInputChange}
-            onBlur={handleInputBlur}
           >
             {paymentFrequencyOptions.map((option, index) => (
               <option id={index} value={option.value} key={index}>
@@ -160,7 +156,6 @@ export const MortgageForm = ({ mortgageAmt, rate, amortizationPeriod, paymentFre
             name="term"
             value={term}
             onChange={handleInputChange}
-            onBlur={handleInputBlur}
           >
             {getTermOptions().map((option, index) => (
               <option id={index} value={option.value} key={index}>
@@ -170,6 +165,15 @@ export const MortgageForm = ({ mortgageAmt, rate, amortizationPeriod, paymentFre
           </select>
           {errors?.term && <div className="error">{errors?.term}</div>}
         </div>
+      </div>
+      <div className="row justify-content-center">
+        <button
+          type="button"
+          class="btn btn-dark"
+          onClick={handleSubmit}
+        >
+          Calculate
+        </button>
       </div>
     </div>
   )
