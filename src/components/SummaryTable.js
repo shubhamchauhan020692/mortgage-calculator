@@ -2,7 +2,7 @@ import React from "react";
 import { summaryCategories } from "../constants/SummaryCategories";
 
 export const SummaryTable = ({ summaryTableData }) => (
-  summaryTableData.length > 0 && <table className="table table-striped">
+  summaryTableData.length > 0 && <table id="summary-table" data-testId="summary-table" className="table table-striped">
     <thead className="thead-dark">
       <tr>
         <th scope="col">Category</th>

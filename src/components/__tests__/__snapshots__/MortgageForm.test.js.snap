@@ -4,6 +4,8 @@ exports[`Mortgage renders correctly 1`] = `
 <DocumentFragment>
   <div
     class="jumbotron col-12 col-sm-6"
+    data-testid="mortgage-form-container"
+    id="mortgage-form-container"
   >
     <div
       class="row align-items-center mb-3"

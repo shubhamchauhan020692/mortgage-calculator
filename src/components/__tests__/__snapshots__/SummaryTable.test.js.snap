@@ -4,6 +4,8 @@ exports[`Mortgage renders correctly 1`] = `
 <DocumentFragment>
   <table
     class="table table-striped"
+    data-testid="summary-table"
+    id="summary-table"
   >
     <thead
       class="thead-dark"

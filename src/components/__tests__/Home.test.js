@@ -9,4 +9,9 @@ describe('Home', () => {
     const { asFragment } = render(<Home />);
     expect(asFragment()).toMatchSnapshot();
   });
+
+  it('renders Mortgage form child correctly', () => {
+    const { getByTestId } = render(<Home />);
+    expect(getByTestId('mortgage-form-container')).toBeInTheDocument();
+  });
 });
