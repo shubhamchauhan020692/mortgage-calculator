@@ -5,6 +5,7 @@ import { validateInputs } from "../utilities/validate";
 
 import { calculateMortage } from "../utilities/calculations";
 import { MortgageForm } from "./MortgageForm";
+import { Header } from "./Header";
 
 export const Home = () => {
   const [mortgageAmt, setMortgageAmt] = useState(50000);
@@ -69,11 +70,11 @@ export const Home = () => {
 
     /** TODO : If no error only then display */
     const { summaryTableData, graphData, barData } = calculateMortage(
-      100000,
-      6,
-      25,
-      24,
-      5
+      mortgageAmt,
+      rate,
+      amortizationPeriod,
+      paymentFrequency,
+      term
     );
     setSummaryTableData(summaryTableData);
     setGraphData(graphData);
@@ -82,7 +83,7 @@ export const Home = () => {
 
   console.log("errors", errors);
   return (
-    <>
+    <div className="main-container">
       <MortgageForm
         mortgageAmt={mortgageAmt}
         rate={rate}
@@ -95,6 +96,6 @@ export const Home = () => {
       />
       <SummaryTable summaryTableData={summaryTableData} />
       {graphData && <Charts graphData={graphData} barData={barData} />}
-    </>
+    </div>
   );
 };

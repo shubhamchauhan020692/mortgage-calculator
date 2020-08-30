@@ -7,7 +7,7 @@ import {
 
 export const MortgageForm = ({ mortgageAmt, rate, amortizationPeriod, paymentFrequency, term, handleInputChange, handleInputBlur, errors }) => {
   return (
-    <div id="mortgage-form-container" data-testid="mortgage-form-container" className="jumbotron col-12 col-sm-6">
+    <div id="mortgage-form-container" data-testid="mortgage-form-container" className="jumbotron no-gutters col-12 col-sm-6 mt-3">
       <div className="row align-items-center mb-3">
         <div className="col-12 col-sm-6">
           <label htmlFor="basic-url">Mortgage Amount</label>
