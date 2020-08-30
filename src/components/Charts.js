@@ -1,44 +1,68 @@
-import React, { useState } from 'react';
-import { LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Line } from "recharts"
-
+import React, { useState } from "react";
+import {
+  AreaChart,
+  Area,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+} from "recharts";
 
 export const Charts = () => {
   const data = [
     {
-      "name": "Page A",
-      "uv": 4000,
-      "pv": 2400,
-      "amt": 2400
+      name: "0",
+      uv: 100000,
     },
     {
-      "name": "Page B",
-      "uv": 3000,
-      "pv": 1398,
-      "amt": 2210
+      name: "100",
+      uv: 100000 - 319.73 * 100,
     },
     {
-      "name": "Page C",
-      "uv": 2000,
-      "pv": 9800,
-      "amt": 2290
-      
+      name: "200",
+      uv: 100000 - 319.73 * 200,
     },
     {
-      "name": "Page D",
-      "uv": 2780,
-      "pv": 3908,
-      "amt": 2000
-    },]
+      name: "300",
+      uv: 100000 - 319.73 * 300,
+    },
+    {
+      name: "400",
+      uv: 100000 - 319.73 * 400,
+    },
+    {
+      name: "500",
+      uv: 100000 - 319.73 * 500,
+    },
+    {
+      name: "600",
+      uv: 100000 - 319.73 * 600,
+    },
+  ];
   return (
-    <LineChart width={730} height={250} data={data}
-      margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-      <CartesianGrid strokeDasharray="3 3" />
+    <AreaChart
+      width={730}
+      height={250}
+      data={data}
+      margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+    >
+      <defs>
+        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+          <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+        </linearGradient>
+      </defs>
       <XAxis dataKey="name" />
       <YAxis />
+      <CartesianGrid strokeDasharray="3 3" />
       <Tooltip />
-      <Legend />
-      <Line type="monotone" dataKey="pv" stroke="#8884d8" />
-      <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-    </LineChart>
-  )
-}
+      <Area
+        type="monotone"
+        dataKey="uv"
+        stroke="#8884d8"
+        fillOpacity={1}
+        fill="url(#colorUv)"
+      />
+    </AreaChart>
+  );
+};

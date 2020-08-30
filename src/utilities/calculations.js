@@ -14,13 +14,18 @@ export const calculateMortage = (
   const numberOfTermPayments = paymentFrequency * term;
   const numberOfTotalPayments = paymentFrequency * amortizationPeriod;
   const summaryTableData = [];
+  const graphData = [];
 
   summaryTableData.push({
-    category: [summaryCategories.NUMBER_OF_PAYMENTS],
+    category: summaryCategories.NUMBER_OF_PAYMENTS,
     term: numberOfTermPayments,
     amortization: numberOfTotalPayments,
   });
 
+  graphData.push({
+    name: "0",
+    principal: mortgageAmt,
+  });
   const monthlyRateFloat = getMonthlyRate(rate) / 100;
   const frequencyfactoredRateFloat = monthlyRateFloat * (12 / paymentFrequency);
 
@@ -31,17 +36,17 @@ export const calculateMortage = (
     (1 - Math.pow(1 + frequencyfactoredRateFloat, -numberOfTotalPayments));
 
   summaryTableData.push({
-    category: [summaryCategories.MORTGAGE_PAYMENT],
+    category: summaryCategories.MORTGAGE_PAYMENT,
     term: financial(payment),
     amortization: financial(payment),
   });
-
+  const firstPrincipalPayment = payment - interestPayment;
   const numberOfTermPaymentsLeft = numberOfTermPayments - 1;
-  let termPrincipalPaymentSum = payment - interestPayment;
+  let termPrincipalPaymentSum = firstPrincipalPayment;
   let termInterestPaymentSum = interestPayment;
-  let endingBalance = mortgageAmt - payment + interestPayment;
+  let endingBalance = mortgageAmt - firstPrincipalPayment;
 
-  for (let i = 0; i < numberOfTermPaymentsLeft; i++) {
+  for (let i = 1; i <= numberOfTermPaymentsLeft; i++) {
     const nextInterestPayment = parseFloat(
       financial(endingBalance * frequencyfactoredRateFloat)
     );
@@ -51,29 +56,66 @@ export const calculateMortage = (
     endingBalance =
       parseFloat(endingBalance) -
       parseFloat(payment) +
-      parseFloat(interestPayment);
+      parseFloat(nextInterestPayment);
     termInterestPaymentSum += nextInterestPayment;
     termPrincipalPaymentSum += nextPrincipalPayment;
+
+    if (i % paymentFrequency === 0) {
+      graphData.push({
+        name: i.toString(),
+        principal: parseFloat(
+          (mortgageAmt - termPrincipalPaymentSum).toFixed(2)
+        ),
+      });
+    }
   }
 
   summaryTableData.push({
-    category: [summaryCategories.PRINCIPAL_PAYMENTS],
+    category: summaryCategories.PRINCIPAL_PAYMENTS,
     term: financial(termPrincipalPaymentSum),
     amortization: financial(mortgageAmt),
   });
 
   summaryTableData.push({
-    category: [summaryCategories.INTEREST_PAYMENTS],
+    category: summaryCategories.INTEREST_PAYMENTS,
     term: financial(termInterestPaymentSum),
     amortization: financial(numberOfTotalPayments * payment - mortgageAmt),
   });
 
   summaryTableData.push({
-    category: [summaryCategories.TOTAL_COST],
+    category: summaryCategories.TOTAL_COST,
     term: financial(numberOfTermPayments * payment),
     amortization: financial(numberOfTotalPayments * payment),
   });
+
+  console.log("ENDING BALANCE", endingBalance);
+  for (let j = numberOfTermPayments; j <= numberOfTotalPayments; j++) {
+    const nextInterestPayment = parseFloat(
+      financial(endingBalance * frequencyfactoredRateFloat)
+    );
+    const nextPrincipalPayment = parseFloat(
+      financial(payment - nextInterestPayment)
+    );
+    endingBalance =
+      parseFloat(endingBalance) -
+      parseFloat(payment) +
+      parseFloat(nextInterestPayment);
+    termInterestPaymentSum += nextInterestPayment;
+    termPrincipalPaymentSum += nextPrincipalPayment;
+
+    if (j % paymentFrequency === 0) {
+      graphData.push({
+        name: j.toString(),
+        principal: parseFloat(
+          (mortgageAmt - termPrincipalPaymentSum).toFixed(2) > 0
+            ? (mortgageAmt - termPrincipalPaymentSum).toFixed(2)
+            : 0
+        ),
+      });
+    }
+  }
   console.log("Summary Table Data", summaryTableData);
+  console.log("Graph Data", graphData);
   return summaryTableData;
 };
 
