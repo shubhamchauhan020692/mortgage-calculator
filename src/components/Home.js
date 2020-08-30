@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ReactTooltip from "react-tooltip";
 import { Charts } from "./Charts";
 import { SummaryTable } from "./SummaryTable";
 import { validateInputs } from "../utilities/validate";

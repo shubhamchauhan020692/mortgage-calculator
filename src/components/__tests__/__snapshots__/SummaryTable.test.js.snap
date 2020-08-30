@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Mortgage renders correctly 1`] = `
+exports[`Summary Table renders correctly 1`] = `
 <DocumentFragment>
   <table
     class="table table-striped"
@@ -35,10 +35,16 @@ exports[`Mortgage renders correctly 1`] = `
         >
           Number of Payments
         </th>
-        <td>
+        <td
+          data-testid="term-0"
+          id="term-0"
+        >
           120
         </td>
-        <td>
+        <td
+          data-testid="amortization-0"
+          id="amortization-0"
+        >
           600
         </td>
       </tr>
@@ -48,10 +54,16 @@ exports[`Mortgage renders correctly 1`] = `
         >
           Mortgage Payment
         </th>
-        <td>
+        <td
+          data-testid="term-1"
+          id="term-1"
+        >
           319.73
         </td>
-        <td>
+        <td
+          data-testid="amortization-1"
+          id="amortization-1"
+        >
           319.73
         </td>
       </tr>
@@ -61,10 +73,16 @@ exports[`Mortgage renders correctly 1`] = `
         >
           Principal Payments,
         </th>
-        <td>
+        <td
+          data-testid="term-2"
+          id="term-2"
+        >
           10019.40
         </td>
-        <td>
+        <td
+          data-testid="amortization-2"
+          id="amortization-2"
+        >
           100000.00
         </td>
       </tr>
@@ -74,10 +92,16 @@ exports[`Mortgage renders correctly 1`] = `
         >
           Interest Payments
         </th>
-        <td>
+        <td
+          data-testid="term-3"
+          id="term-3"
+        >
           28348.20
         </td>
-        <td>
+        <td
+          data-testid="amortization-3"
+          id="amortization-3"
+        >
           91838.89
         </td>
       </tr>
@@ -87,10 +111,16 @@ exports[`Mortgage renders correctly 1`] = `
         >
           Total Cost
         </th>
-        <td>
+        <td
+          data-testid="term-4"
+          id="term-4"
+        >
           38367.78
         </td>
-        <td>
+        <td
+          data-testid="amortization-4"
+          id="amortization-4"
+        >
           191838.89
         </td>
       </tr>
