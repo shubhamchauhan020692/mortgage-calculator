@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Charts } from "./Charts";
 import { SummaryTable } from "./SummaryTable";
-import { validateInputs } from "../utilities/validate";
-
+import { validateInputs, hasErrors } from "../utilities/validate";
 import { calculateMortage } from "../utilities/calculations";
 import { MortgageForm } from "./MortgageForm";
-import { Header } from "./Header";
 
 export const Home = () => {
   const [mortgageAmt, setMortgageAmt] = useState(50000);
@@ -55,20 +53,7 @@ export const Home = () => {
     }
   };
 
-  const handleInputBlur = () => {
-    const formErrors = validateInputs(
-      mortgageAmt,
-      rate,
-      amortizationPeriod,
-      term
-    );
-    formErrors &&
-      setErrors({
-        ...errors,
-        ...formErrors,
-      });
-
-    /** TODO : If no error only then display */
+  const calculate = () => {
     const { summaryTableData, graphData, barData } = calculateMortage(
       mortgageAmt,
       rate,
@@ -79,6 +64,23 @@ export const Home = () => {
     setSummaryTableData(summaryTableData);
     setGraphData(graphData);
     setBarData(barData);
+  }
+
+  const handleInputBlur = () => {
+    const formErrors = validateInputs(
+      mortgageAmt,
+      rate,
+      amortizationPeriod,
+      term
+    );
+    if (hasErrors(formErrors)) {
+      setErrors({
+        ...errors,
+        ...formErrors,
+      });
+    } else {
+      calculate();
+    }
   };
 
   console.log("errors", errors);
@@ -94,8 +96,8 @@ export const Home = () => {
         handleInputBlur={handleInputBlur}
         errors={errors}
       />
-      <SummaryTable summaryTableData={summaryTableData} />
-      {graphData && <Charts graphData={graphData} barData={barData} />}
+      {summaryTableData?.length > 0 && !hasErrors(errors) && <SummaryTable summaryTableData={summaryTableData} />}
+      {graphData && !hasErrors(errors) && <Charts graphData={graphData} barData={barData} />}
     </div>
   );
 };
