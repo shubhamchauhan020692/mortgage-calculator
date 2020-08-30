@@ -88,7 +88,6 @@ export const calculateMortage = (
     amortization: financial(numberOfTotalPayments * payment),
   });
 
-  console.log("ENDING BALANCE", endingBalance);
   for (let j = numberOfTermPayments; j <= numberOfTotalPayments; j++) {
     const nextInterestPayment = parseFloat(
       financial(endingBalance * frequencyfactoredRateFloat)
@@ -116,7 +115,19 @@ export const calculateMortage = (
   }
   console.log("Summary Table Data", summaryTableData);
   console.log("Graph Data", graphData);
-  return summaryTableData;
+  return {
+    summaryTableData,
+    graphData,
+    barData: [
+      {
+        totalCost: "Total Mortgage Cost",
+        Interest: parseFloat(
+          (payment * numberOfTotalPayments - mortgageAmt).toFixed(2)
+        ),
+        Principal: parseFloat(mortgageAmt.toFixed(2)),
+      },
+    ],
+  };
 };
 
 /** Canadian annual rate is compunded semi-annually */
