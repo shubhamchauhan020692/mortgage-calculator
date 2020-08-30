@@ -1,6 +1,6 @@
 import { summaryCategories } from "../constants/SummaryCategories";
 
-function financial(x) {
+const convertToFloat = x => {
   return Number.parseFloat(x).toFixed(2);
 }
 
@@ -37,8 +37,8 @@ export const calculateMortage = (
 
   summaryTableData.push({
     category: summaryCategories.MORTGAGE_PAYMENT,
-    term: financial(payment),
-    amortization: financial(payment),
+    term: convertToFloat(payment),
+    amortization: convertToFloat(payment),
   });
   const firstPrincipalPayment = payment - interestPayment;
   const numberOfTermPaymentsLeft = numberOfTermPayments - 1;
@@ -48,10 +48,10 @@ export const calculateMortage = (
 
   for (let i = 1; i <= numberOfTermPaymentsLeft; i++) {
     const nextInterestPayment = parseFloat(
-      financial(endingBalance * frequencyfactoredRateFloat)
+      convertToFloat(endingBalance * frequencyfactoredRateFloat)
     );
     const nextPrincipalPayment = parseFloat(
-      financial(payment - nextInterestPayment)
+      convertToFloat(payment - nextInterestPayment)
     );
     endingBalance =
       parseFloat(endingBalance) -
@@ -72,28 +72,28 @@ export const calculateMortage = (
 
   summaryTableData.push({
     category: summaryCategories.PRINCIPAL_PAYMENTS,
-    term: financial(termPrincipalPaymentSum),
-    amortization: financial(mortgageAmt),
+    term: convertToFloat(termPrincipalPaymentSum),
+    amortization: convertToFloat(mortgageAmt),
   });
 
   summaryTableData.push({
     category: summaryCategories.INTEREST_PAYMENTS,
-    term: financial(termInterestPaymentSum),
-    amortization: financial(numberOfTotalPayments * payment - mortgageAmt),
+    term: convertToFloat(termInterestPaymentSum),
+    amortization: convertToFloat(numberOfTotalPayments * payment - mortgageAmt),
   });
 
   summaryTableData.push({
     category: summaryCategories.TOTAL_COST,
-    term: financial(numberOfTermPayments * payment),
-    amortization: financial(numberOfTotalPayments * payment),
+    term: convertToFloat(numberOfTermPayments * payment),
+    amortization: convertToFloat(numberOfTotalPayments * payment),
   });
 
   for (let j = numberOfTermPayments; j <= numberOfTotalPayments; j++) {
     const nextInterestPayment = parseFloat(
-      financial(endingBalance * frequencyfactoredRateFloat)
+      convertToFloat(endingBalance * frequencyfactoredRateFloat)
     );
     const nextPrincipalPayment = parseFloat(
-      financial(payment - nextInterestPayment)
+      convertToFloat(payment - nextInterestPayment)
     );
     endingBalance =
       parseFloat(endingBalance) -
@@ -121,10 +121,10 @@ export const calculateMortage = (
     barData: [
       {
         totalCost: "Total Mortgage Cost",
-        Interest: parseFloat(
+        interest: parseFloat(
           (payment * numberOfTotalPayments - mortgageAmt).toFixed(2)
         ),
-        Principal: parseFloat(mortgageAmt.toFixed(2)),
+        principal: parseFloat(typeof (mortgageAmt) === 'float' ? mortgageAmt.toFixed(2) : mortgageAmt),
       },
     ],
   };

@@ -22,7 +22,7 @@ describe('Mortgage', () => {
     const mortgageAmt = queryByTestId('mortgageAmt')
     fireEvent.change(mortgageAmt, { target: { value: '999999999' } });
     fireEvent.blur(mortgageAmt);
-    expect(getByText(/Invalid range/)).toBeTruthy();
+    expect(getByText('Amount should be greater than 999 and less than 9,999,999')).toBeTruthy();
   });
 
   it('Rate should be rendered', async () => {
