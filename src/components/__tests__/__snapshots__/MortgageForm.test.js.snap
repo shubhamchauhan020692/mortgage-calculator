@@ -3,7 +3,7 @@
 exports[`Mortgage renders correctly 1`] = `
 <DocumentFragment>
   <div
-    class="jumbotron col-12 col-sm-6"
+    class="jumbotron no-gutters col-12 col-sm-6 mt-3"
     data-testid="mortgage-form-container"
     id="mortgage-form-container"
   >

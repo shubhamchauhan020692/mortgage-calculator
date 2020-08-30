@@ -19,20 +19,37 @@ describe('Summary Table', () => {
     const amortizatoinPeriodInput = queryByTestId('amortizationPeriod')
     const paymentFrequencyInput = queryByTestId('paymentFrequency')
     const termInput = queryByTestId('term')
-    fireEvent.change(mortgageAmt, { target: { value: '1000000' } });
-    fireEvent.change(rateInput, { target: { value: '5' } });
+    fireEvent.change(mortgageAmt, { target: { value: '100000' } });
+    fireEvent.change(rateInput, { target: { value: '6' } });
     fireEvent.change(amortizatoinPeriodInput, { target: { value: '25' } });
     fireEvent.change(paymentFrequencyInput, { target: { value: '12' } });
     fireEvent.change(termInput, { target: { value: '5' } });
     fireEvent.blur(mortgageAmt);
     // console.log('getByTestId-000', getByTestId('term-0'))
-    expect(getAllByText(/319.73/).length).toEqual(2)
-    expect(getByText(/10153.60/)).toBeTruthy();
-    expect(getByText(/28214.00/)).toBeTruthy();
-    expect(getByText(/38367.78/)).toBeTruthy();
+    expect(getAllByText('639.81').length).toEqual(2)
+    expect(getByText(/10163.47/)).toBeTruthy();
+    expect(getByText(/28225.12/)).toBeTruthy();
+    expect(getByText(/38388.40/)).toBeTruthy();
 
     expect(getByText(/100000.00/)).toBeTruthy();
-    expect(getByText('91838.89')).toBeTruthy();
-    expect(getByText('191838.89')).toBeTruthy();
+    expect(getByText('91941.99')).toBeTruthy();
+    expect(getByText('191941.99')).toBeTruthy();
   });
+
+  it('Summary table should not be rendered in case of any error', () => {
+    const { queryByTestId, getByTestId } = render(<Home />);
+    const mortgageAmt = getByTestId('mortgageAmt')
+    const rateInput = getByTestId('rate')
+    const amortizatoinPeriodInput = getByTestId('amortizationPeriod')
+    const paymentFrequencyInput = getByTestId('paymentFrequency')
+    const termInput = getByTestId('term')
+    fireEvent.change(mortgageAmt, { target: { value: '1000000' } });
+    fireEvent.change(rateInput, { target: { value: '105' } });
+    fireEvent.change(amortizatoinPeriodInput, { target: { value: '25' } });
+    fireEvent.change(paymentFrequencyInput, { target: { value: '12' } });
+    fireEvent.change(termInput, { target: { value: '5' } });
+    fireEvent.blur(mortgageAmt);
+    expect(queryByTestId('summary-table')).not.toBeTruthy();
+  });
+
 });
