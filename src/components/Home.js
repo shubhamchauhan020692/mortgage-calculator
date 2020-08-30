@@ -14,6 +14,8 @@ export const Home = () => {
   const [paymentFrequency, setPaymentFrequency] = useState(12);
   const [term, setTerm] = useState(5);
   const [summaryTableData, setSummaryTableData] = useState(5);
+  const [graphData, setGraphData] = useState(null);
+  const [barData, setBarData] = useState({});
   const [errors, setErrors] = useState({
     mortgageAmt: "",
     rate: "",
@@ -67,8 +69,16 @@ export const Home = () => {
       });
 
     /** TODO : If no error only then display */
-    const summaryTableData = calculateMortage(100000, 6, 25, 24, 5);
-    setSummaryTableData(summaryTableData)
+    const { summaryTableData, graphData, barData } = calculateMortage(
+      100000,
+      6,
+      25,
+      24,
+      5
+    );
+    setSummaryTableData(summaryTableData);
+    setGraphData(graphData);
+    setBarData(barData);
   };
 
   console.log("errors", errors);
@@ -85,7 +95,7 @@ export const Home = () => {
         errors={errors}
       />
       <SummaryTable summaryTableData={summaryTableData} />
-      <Charts />
+      {graphData && <Charts graphData={graphData} barData={barData} />}
     </>
   );
 };
