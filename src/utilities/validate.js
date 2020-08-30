@@ -35,3 +35,13 @@ export const validateTerm = (amortizationPeriod, value) => {
     return "";
   }
 };
+
+// export const hasError = (formErrors) => {
+//   let harError = false
+//   for (let [key, value] in Object(formErrors.entries)) {
+//     if (value !== '') {
+//       harError = true
+//     }
+//   }
+//   return harError
+// }
